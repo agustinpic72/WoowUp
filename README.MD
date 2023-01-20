@@ -178,13 +178,26 @@ Esta clase hija, posee herencia multiple de la clase *Alerta* y de *Tema*, gener
 ```python
     def __init__(self, tema = None, alerta_leida = False):
         Alerta.__init__(self, tema, alerta_leida, tipo_de_alerta = 'Urgente', fecha_expiracion = datetime.now() + timedelta(days=1, hours=10))
+```
 
+# Testing
+He escrito 3 archivos diferentes para testear cada una de las clases principales, *Usuario, Alerta, Tema*, se pueden ejecutar los mismos situandose en la carpeta *primera_parte_POO* y corriendo el comando:
+```bash
+[~]$ python3 -m unittest
+o
+[~]$ python3 -m unittest -v #Para un output mas descriptivo
+```
+
+## SQL Query
+Esta query nos realiza un inner join de dos tablas, y las filtra con las fechas comprendidas entre el año pasado y este, a su vez, el import de las ventas debe ser mayor a $100.000.
+```SQL
+SELECT C.id, C.nombre, C.apellido, V.fecha, V.importe FROM Clientes C
+INNER JOIN Ventas V ON C.id = V.id_cliente
+WHERE V.fecha BETWEEN '20220120' AND '20230120' AND V.importe > 100000;
 ```
 
 # CONSIGNAS
-
 ## Ejercicio - Sistema de Alertas:
-
 ### Se pide programar un sistema para enviar alertas a usuarios que tenga la siguiente funcionalidad:
 
     1- Se pueden registrar usuarios que recibirán alertas. 

@@ -1,0 +1,3 @@
+SELECT C.id, C.nombre, C.apellido, V.fecha, V.importe FROM Clientes C
+inner join Ventas V on C.id = V.id_cliente
+where V.fecha between '20220120' and '20230120' and V.importe > 100000;
