@@ -53,22 +53,20 @@ class Usuario():
         alertas.append(sorted(alertas_spam, key=lambda alerta: alerta.fecha_expiracion))
         return {'urgentes':alertas[0], 'informativas':alertas[1], 'spam':alertas[2]}
     
+    def __str__(self):
+        return self.nombre_usuario
+    
 class Tema():
     def __init__(self, tema = None):
         self.tema = tema
         self.alertas = {'urgentes':[],'informativas':[],'spam':[]}
 
-    def __str__(self):
-        return self.tema
-
     def asigna_alertas_a_temas(self):
         for alerta in lista_alertas:
             if alerta.tema.__str__() == self.tema and alerta not in self.alertas and alerta.tipo_de_alerta == 'Informativa':
                 self.alertas['informativas'].append(alerta)
-
             elif alerta.tema.__str__() == self.tema and alerta not in self.alertas and alerta.tipo_de_alerta == 'Urgente':
                 self.alertas['urgentes'].append(alerta)
-                
             elif alerta.tema.__str__() == self.tema and alerta not in self.alertas and alerta.tipo_de_alerta == 'Spam':
                 self.alertas['spam'].append(alerta)
     
@@ -86,6 +84,9 @@ class Tema():
         alertas_sin_leer_ni_expirar['spam'] = alertas_spam_sin_leer_ni_expirar
         return alertas_sin_leer_ni_expirar
 
+    def __str__(self):
+        return self.tema
+
 class Alerta(Tema):
     #Las alertas expiran 1 dia, 10 horas despues de creadas
     def __init__(self, tema = None, alerta_leida = False, tipo_de_alerta = 'Spam', fecha_expiracion = datetime.now() + timedelta(days=1, hours=10)):
@@ -98,7 +99,7 @@ class Alerta(Tema):
         self.asigna_alertas_a_usuarios()
 
     def obtener_tema(self):
-        return f'Esta alerta pertenece al tema: {self.tema.__str__()}'
+        return self.tema.__str__()
 
     def obtener_fecha_expiracion(self):
         return self.fecha_expiracion
@@ -108,6 +109,9 @@ class Alerta(Tema):
 
     def obtener_tipo_de_alerta(self):
         return self.tipo_de_alerta
+    
+    def __str__(self):
+        return f'Alerta de tipo {self.obtener_tipo_de_alerta()}'
 
         
 class AlertaInformativa(Alerta):

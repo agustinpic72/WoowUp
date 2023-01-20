@@ -20,9 +20,9 @@ class AlertaTestCase(unittest.TestCase):
         self.alerta_literaria_expirada = Alerta(tema = self.tema_literatura, fecha_expiracion = datetime.now() - timedelta(days=1, hours=10))
 
     def test_obtener_tema(self):
-        self.assertEqual(self.alerta_deportiva.obtener_tema(),'Esta alerta pertenece al tema: deportes')
-        self.assertEqual(self.alerta_tecnologica.obtener_tema(),'Esta alerta pertenece al tema: tecnologia')
-        self.assertEqual(self.alerta_literaria.obtener_tema(),'Esta alerta pertenece al tema: literatura')
+        self.assertEqual(self.alerta_deportiva.obtener_tema(),'deportes')
+        self.assertEqual(self.alerta_tecnologica.obtener_tema(),'tecnologia')
+        self.assertEqual(self.alerta_literaria.obtener_tema(),'literatura')
     
     def test_obtener_fecha_expiracion(self):
         self.assertLess(datetime.now(), self.alerta_deportiva.obtener_fecha_expiracion())

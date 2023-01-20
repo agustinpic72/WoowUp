@@ -76,13 +76,13 @@ class UsuarioTestCase(unittest.TestCase):
         self.assertEqual(self.marta.filtra_alertas_leidas_y_expiradas()[0],self.alerta_unica_expirada_marta)
 
     def test_asigna_y_obtiene_alertas(self):
-        #Agrega alertas ya leidas para verificar que la funcion asigne solo las alertas sin leer
+        # Agrega alertas ya leidas para verificar que la funcion asigne solo las alertas sin leer
         self.alerta_informativa_deportiva_leida = AlertaInformativa(tema = self.tema_deportes, alerta_leida = True)
         self.alerta_informativa_tecnologica_leida = AlertaInformativa(tema = self.tema_tecnologia, alerta_leida = True)
         self.alerta_informativa_literaria_leida = AlertaInformativa(tema = self.tema_literatura, alerta_leida = True)
         self.assertEqual(len(lista_alertas),18)
 
-        #Se llama dos veces a la función asigna_alertas para verificar que no se asignen alertas ya asignadas
+        # Se llama dos veces a la función asigna_alertas para verificar que no se dupliquen alertas
         self.agustin.asigna_temas(self.tema_deportes)
         self.agustin.asigna_alertas()
         self.agustin.asigna_alertas()
@@ -126,6 +126,4 @@ class UsuarioTestCase(unittest.TestCase):
     def test_alertas_creadas(self):
         self.assertEqual(len(lista_alertas),15)
 
-if __name__ == '__main__':
-    unittest.main()
 

@@ -7,30 +7,32 @@ Seguramente conocés la funcionalidad de Notificaciones de Facebook: es esa camp
 En este proyecto se busca realizar a grandes rasgos un sistema de usuarios y alertas con programación orientada a objetos en el cual se pueda simular la interaccion del usuario con el entorno.
 
 ## Recomendaciones y primeros pasos
-El proyecto esta pensado para ejecutarse por linea de comandos, por lo que para ejecutarlo recomiendo abrir una terminal nueva en la carpeta donde hayamos descargado localmente el repositorio, ejecutar python e importar el archivo **main.py** completo. Cabe destacar que tambien existe un archivo llamado **datos_de_ejemplo.py** que al importarlo genera diferentes estructuras de datos para facilitar la interacción con la aplicación.
+El proyecto esta pensado para ejecutarse por linea de comandos, por lo que para ejecutarlo recomiendo abrir una terminal nueva en la carpeta donde hayamos descargado localmente el repositorio, ejecutar python e importar el archivo **main.py** completo. Cabe destacar que tambien existe un archivo llamado **datos_de_ejemplo.py** que al importarlo genera diferentes estructuras de datos para facilitar la interacción con la aplicación, además de esto, también podremos ejecutar el archivo directamente para ver el output de un caso ideal.
 
 ```bash
-[~]$ python3
->>> from main import * 
-o
->>> from datos_de_ejemplo import *
+python3 datos_de_ejemplo.py
+```
+```python
+from main import * 
+#también podemos utilizar
+from datos_de_ejemplo import *
 ```
 
 Una vez importadas todas las clases y metodos podrémos empezar a jugar un poco con los mismos.
 ```python
->>> agustin = Usuario('agustin', 'password') #Esta clase solicita un nombre de usuario y una contraseña.
->>> tema_deportes = Tema('deportes') #Creamos un tema para posteriormente asignarlo a nuestro usuario
->>> agustin.asigna_temas(tema_deportes)
+agustin = Usuario('agustin', 'password') #Esta clase solicita un nombre de usuario y una contraseña.
+tema_deportes = Tema('deportes') #Creamos un tema para posteriormente asignarlo a nuestro usuario
+agustin.asigna_temas(tema_deportes)
 'Tema agregado'
->>> 
+
 ```
 
 Ahora que tenemos nuestro usuario configurado podemos proceder a crear alertas.
-Las alertas se dividen en 3 tipos, *Urgentes*, consideradas de maxima prioridad, las cuales necesitamos que siempre se muestren primero, *Informativas*, son de segunda prioridad, y por ultimo decidí agregar un tercer tipo a la clasificación, *Spam*, creada para enviar alertas generales a todos los usuarios *(ej: Actualizaciones de sistema, cambio en las normas, alguna nueva feature)*.
+Las alertas se dividen en 3 tipos, *Urgentes*, consideradas de maxima prioridad, *Informativas*, son de segunda prioridad, y por ultimo decidí agregar un tercer tipo a la clasificación, *Spam*, creada para enviar alertas generales a todos los usuarios, como ser: **Actualizaciones de sistema, cambio en las normas, lanzamiento de una nueva feature**.
 ```python
->>> alerta_spam_deportiva = Alerta(tema = self.tema_deportes)
->>> alerta_informativa_deportiva = AlertaInformativa(tema = self.tema_deportes)
->>> alerta_urgente_deportiva = AlertaUrgente(tema = self.tema_deportes)
+alerta_spam_deportiva = Alerta(tema = self.tema_deportes)
+alerta_informativa_deportiva = AlertaInformativa(tema = self.tema_deportes)
+alerta_urgente_deportiva = AlertaUrgente(tema = self.tema_deportes)
 ```
  
 Estos son los objetos que nos encontraremos a lo largo de este proyecto, en las secciones siguientes voy a diseccionar un poco cada uno de ellos para hablar en profundidad de cada uno de sus metodos.
@@ -183,13 +185,14 @@ Esta clase hija, posee herencia multiple de la clase *Alerta* y de *Tema*, gener
 # Testing
 He escrito 3 archivos diferentes para testear cada una de las clases principales, *Usuario, Alerta, Tema*, se pueden ejecutar los mismos situandose en la carpeta *primera_parte_POO* y corriendo el comando:
 ```bash
-[~]$ python3 -m unittest
+python3 -m unittest
 o
-[~]$ python3 -m unittest -v #Para un output mas descriptivo
+python3 -m unittest -v #Para un output mas descriptivo
 ```
 
-## SQL Query
+## Ejercicio - SQL Query
 Esta query nos realiza un inner join de dos tablas, y las filtra con las fechas comprendidas entre el año pasado y este, a su vez, el import de las ventas debe ser mayor a $100.000.
+
 ```SQL
 SELECT C.id, C.nombre, C.apellido, V.fecha, V.importe FROM Clientes C
 INNER JOIN Ventas V ON C.id = V.id_cliente
